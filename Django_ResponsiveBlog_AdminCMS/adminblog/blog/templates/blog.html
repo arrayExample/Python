@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+{% for Post in object_list %}
+{% if forloop.first %}<div class="card-deck">{% endif %}
+
+
+    <div class="card mt-2 mb-2">
+        <div class="card-body">
+            <a style="color: inherit;" href="{% url 'blogdetail' slug=Post.slug %}">
+                <h5 class="card-title">{{Post.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Created On: {{Post.created}}</h6>
+                <p class="card-text">{{Post.description}}</p>
+            </a>
+        </div>
+    </div>
+
+
+    {% if forloop.counter|divisibleby:4 %}</div><div class="card-deck">{% endif %}
+    {% if forloop.last %}</div>{% endif %}
+{% endfor %}
+<div class="col-md-1"></div>
+</div>
+
+{% endblock %}
